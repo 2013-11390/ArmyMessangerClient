@@ -3,6 +3,7 @@ package com.example.administrator.armymessanger;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.EditText;
 import android.view.*;
 import java.io.*;
@@ -30,9 +31,11 @@ public class SearchActivity extends Activity {
             EditText etCompanyName = (EditText) findViewById(R.id.companyName);
             EditText etJoinDay = (EditText) findViewById(R.id.joinDay);
             EditText etName = (EditText) findViewById(R.id.name);
+            EditText etBirthDay = (EditText) findViewById(R.id.birthday);
 
+            //new GetRequest().execute("http://10.53.128.114:8080/posts");
             //new GetRequest().execute("https://my-rest-api-oscha.c9users.io/posts");
-            new PostRequest(etCompanyName.getText().toString(), etJoinDay.getText().toString(), etName.getText().toString()).execute("https://my-rest-api-oscha.c9users.io/posts");
+            new PostRequest(etCompanyName.getText().toString(), etJoinDay.getText().toString(), etName.getText().toString(), etBirthDay.getText().toString()).execute("http://10.53.128.114:8080/posts");
             //PostRequest postRequest = new PostRequest(etCompanyName.getText().toString(), etJoinDay.getText().toString(), etName.getText().toString());
             //postRequest.execute("https://my-rest-api-oscha.c9users.io/posts");
         }
@@ -53,7 +56,7 @@ public class SearchActivity extends Activity {
             StringBuilder sb = new StringBuilder();
             try {
                 URL url = new URL(args[0]);
-                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                HttpURLConnection    con = (HttpURLConnection) url.openConnection();
 
                 int responseCode;
 
@@ -91,11 +94,13 @@ public class SearchActivity extends Activity {
         String m_strCompanyName;
         String m_strJoinDay;
         String m_strName;
+        String m_strBirthday;
 
-        public PostRequest(String strCompany, String strJoinDay, String strName){
+        public PostRequest(String strCompany, String strJoinDay, String strName, String strBirthday){
             m_strCompanyName = strCompany;
             m_strJoinDay = strJoinDay;
             m_strName = strName;
+            m_strBirthday = strBirthday;
         }
         @Override
         protected void onPreExecute() {
@@ -113,13 +118,13 @@ public class SearchActivity extends Activity {
                 con.setDoOutput(true);
 
                 OutputStream os = con.getOutputStream();
-                String strData = "CN" + "=" + m_strCompanyName + "&" + "JD=" + m_strJoinDay + "&" + "NM" + m_strName;
+                String strData = "CompanyName" + "=" + m_strCompanyName + "&" + "JoinDay=" + m_strJoinDay + "&" + "Name=" + m_strName + "&BirthDay=" + m_strBirthday;
                 os.write(strData.getBytes("UTF-8"));
                 os.flush();
                 os.close();
-
-                con.getResponseCode();
-                System.out.println("he");
+                if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                } else {
+                }
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();

@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="text"
-            android:text="companyName"/>
+            android:text="AirForce"/>
     </LinearLayout>
 
     <LinearLayout
@@ -38,9 +38,20 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="text"
-            android:text="name"/>
+            android:text="성태종"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/birthday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Birthday"/>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"

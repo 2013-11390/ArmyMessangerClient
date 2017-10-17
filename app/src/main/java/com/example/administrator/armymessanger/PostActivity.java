@@ -10,6 +10,8 @@ public class PostActivity extends Activity {
         /*super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);*/
 
+
+        //after login authentication
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
     }
